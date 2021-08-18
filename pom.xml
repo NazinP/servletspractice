@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>ru.sbt.nazinp.servletspractice</groupId>
+    <artifactId>servlets-practice</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <packaging>war</packaging>
+
+    <properties>
+        <test.jetty.port>8080</test.jetty.port>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.2</version>
+                <configuration>
+<!--                    <webXml>target/web.xml</webXml>-->
+                    <webResources>
+                        <resource>
+                            <filtering>true</filtering>
+                            <directory>src/main/webapp</directory>
+                            <includes>
+                                <include>index.html</include>
+                                <include>WEB-INF/web.xml</include>
+                            </includes>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.2.1.v20140609</version>
+                <executions>
+                    <execution>
+                        <id>start-jetty</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>stop</goal>
+                            <goal>run-war</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <httpConnector>
+                        <port>${test.jetty.port}</port>
+                    </httpConnector>
+                    <webAppConfig>
+                        <contextPath>/maven-servlet</contextPath>
+                    </webAppConfig>
+                    <stopKey>red</stopKey>
+                    <stopPort>1111</stopPort>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+
+</project>

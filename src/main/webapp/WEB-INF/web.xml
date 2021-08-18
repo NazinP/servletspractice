@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+
+    <servlet>
+        <servlet-name>MavenServlet</servlet-name>
+        <servlet-class>
+            servlets.MavenServlet
+        </servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>MavenServlet</servlet-name>
+        <url-pattern>/mvn/*</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>Utf8Filter</filter-name>
+        <filter-class>filters.Utf8Filter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>UsernameFilter</filter-name>
+        <filter-class>filters.UsernameFilter</filter-class>
+        <init-param>
+            <param-name>UserToBan</param-name>
+            <param-value>Balrog</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>Utf8Filter</filter-name>
+        <url-pattern>*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>UsernameFilter</filter-name>
+        <url-pattern>*</url-pattern>
+    </filter-mapping>
+
+</web-app>
